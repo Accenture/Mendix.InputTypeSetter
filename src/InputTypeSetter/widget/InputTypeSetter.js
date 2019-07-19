@@ -49,7 +49,9 @@ define([
         _setAttributes: function () {
             //logger.debug(this.id + "._setAttributes");
             var _this = this;
-            var parents = document.querySelectorAll(this.widgetsSelector);
+            var parents = Array.prototype.slice.call( // NodeList to Array, cross-browser safe
+                document.querySelectorAll(this.widgetsSelector)
+            );
             parents.forEach(function (parent) {
 
                 // set by widgetid staring with mxui_widget_NumberInput_
@@ -66,7 +68,7 @@ define([
                         if (parts.length == 2) {
                             var attrib = parts[0];
                             var value = parts[1];
-                            var targetInputs = parent.querySelectorAll('input');
+                            var targetInputs = Array.prototype.slice.call(parent.querySelectorAll('input'));
                             targetInputs.forEach(function (targetInput) {
                                 _this._setAttrib(targetInput, attrib, value);
                             });
